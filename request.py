@@ -5,10 +5,11 @@ from urllib.parse import urlparse
 
 def fetch_image(url):
     try:
+        # Send HEAD request first to check headers
         head_response=requests.head(url, timeout=30, allow_redirects=True)
         head_response.raise_for_status()
 
-        #check the haeder content-type
+        #check the header content-type
         content_type = head_response.headers.get('Content-type', '')
         if content_type.startswith("/image"):
             print(f"skipping (not an image):(url)")
